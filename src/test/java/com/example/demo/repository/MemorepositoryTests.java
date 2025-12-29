@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -119,5 +120,23 @@ public class MemorepositoryTests {
         result.get().forEach(memo -> {
             System.out.println(memo);
         });
+    }
+
+    @Test
+    public void testQueryMethod() {
+        List<Memo> list = memoRepository.findByMemoBetweenOrderByMemoDesc(70L, 80L);
+
+        for (Memo memo : list) {
+            System.out.println(memo);
+        }
+    }
+
+    @Test
+    public void testQueryMethodWithPageable() {
+        Pageable pageable = PageRequest.of(0, 10, Sort.by("memo").descending());
+
+        Page<Memo> result = memoRepository.findByMemoBetween(10L, 50L, pageable);
+
+        result.get().forEach(System.out ::println);
     }
 }
