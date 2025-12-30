@@ -62,7 +62,7 @@ public class MemorepositoryTests {
         Long mno = 1L;
 
         Memo memo = Memo.builder()
-                .memo(mno)
+                .mno(mno)
                 .memoText("Update Text")
                 .build();
 
